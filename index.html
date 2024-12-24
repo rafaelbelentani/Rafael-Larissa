@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rafael & Larissa</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+    <style>
+        .slideshow-container {
+            max-width: 400px; /* Adjust the maximum width of the slideshow */
+            margin: auto;
+            position: relative;
+        }
+
+        .slides img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px; /* Optional: Add rounded corners */
+        }
+
+        .dot {
+            height: 10px;
+            width: 10px;
+            margin: 5px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+        }
+
+        .active {
+            background-color: #717171;
+        }
+
+        .fade {
+            animation: fadeEffect 1.5s;
+        }
+
+        @keyframes fadeEffect {
+            from {opacity: 0.4;} 
+            to {opacity: 1;}
+        }
+
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 10px;
+            margin-top: -22px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+        .prev {
+            left: 0;
+            border-radius: 3px 0 0 3px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="menu">
+                <h1>Rafael & Larissa</h1>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="intro">
+            <h2>Nossa História de Amor!</h2>
+            <p>Nossa história é aquela história que tem que acontecer, pois aconteceram várias
+                coisas para que a gente se conhecesse, vários acasos para a gente se encontrar 
+            e se conhecer.  </p>
+            <p>CONTINUA ... </p>
+        </section>
+
+        <section id="counter">
+            <h2>Estamos juntos há...</h2>
+            <div id="time">
+                <p><span id="years">0</span> Anos, <span id="months">0</span> Meses, <span id="days">0</span> Dias,</p>
+                <p><span id="hours">0</span> Horas, <span id="minutes">0</span> Minutos, <span id="seconds">0</span> Segundos</p>
+            </div>
+        </section>
+
+        <section id="photos">
+            <h2>Galeria de Fotos</h2>
+            <div class="slideshow-container">
+                <div class="slides fade">
+                    <img src="photo1.jpeg" alt="Photo 1">
+                </div>
+                <div class="slides fade">
+                    <img src="photo2.jpeg" alt="Photo 2">
+                </div>
+                <div class="slides fade">
+                    <img src="photo3.jpeg" alt="Photo 3">
+                </div>
+                <div class="slides fade">
+                    <img src="photo4.jpeg" alt="Photo 3">
+                </div>
+                <div class="slides fade">
+                    <img src="photo5.jpeg" alt="Photo 3">
+                </div>
+                <div class="slides fade">
+                    <img src="photo6.jpeg" alt="Photo 3">
+                </div>
+                <div class="slides fade">
+                    <img src="photo7.jpeg" alt="Photo 3">
+                </div>
+                <div class="slides fade">
+                    <img src="photo8.jpeg" alt="Photo 3">
+                </div>
+                <div class="slides fade">
+                    <img src="photo9.jpeg" alt="Photo 3">
+                </div>
+                <div class="slides fade">
+                    <img src="photo10.jpeg" alt="Photo 3">
+                </div>
+                <div class="slides fade">
+                    <img src="photo11.jpeg" alt="Photo 3">
+                </div>
+
+                <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+                <a class="next" onclick="changeSlide(1)">&#10095;</a>
+            </div>
+            <div style="text-align:center">
+                <span class="dot" onclick="currentSlide(1)"></span> 
+                <span class="dot" onclick="currentSlide(2)"></span> 
+                <span class="dot" onclick="currentSlide(3)"></span> 
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Our Love Story</p>
+    </footer>
+
+    <script>
+        let slideIndex = 0;
+        showSlidesAuto();
+
+        function changeSlide(n) {
+            slideIndex += n - 1; // Adjust the slideIndex for manual navigation
+            showSlidesAuto();
+        }
+
+        function currentSlide(n) {
+            slideIndex = n - 1;
+            showSlidesAuto();
+        }
+
+        function showSlidesAuto() {
+            let i;
+            let slides = document.getElementsByClassName("slides");
+            let dots = document.getElementsByClassName("dot");
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";  
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) {slideIndex = 1}    
+            slides[slideIndex-1].style.display = "block";  
+            dots[slideIndex-1].className += " active";
+            setTimeout(showSlidesAuto, 10000); // Change image every 10 seconds
+        }
+
+        function updateCounter() {
+            const startDate = new Date("2020-10-05T00:00:00");
+            const now = new Date();
+            const difference = now - startDate;
+
+            const years = Math.floor(difference / (1000 * 60 * 60 * 24 * 365));
+            const months = Math.floor((difference % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24 * 30));
+            const days = Math.floor((difference % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+            document.getElementById("years").textContent = years;
+            document.getElementById("months").textContent = months;
+            document.getElementById("days").textContent = days;
+            document.getElementById("hours").textContent = hours;
+            document.getElementById("minutes").textContent = minutes;
+            document.getElementById("seconds").textContent = seconds;
+        }
+
+        setInterval(updateCounter, 1000);
+        updateCounter();
+    </script>
+</body>
+</html>
